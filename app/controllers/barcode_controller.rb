@@ -1,8 +1,12 @@
 class BarcodeController < ApplicationController
   def upload
-    Rails.logger.info params.permit(:image).to_s
     pic = Picture.create!(params.permit(:image))
 
+    render json: {barcode_id: pic.id}
+  end
+
+  def show
+    pic = Picture.find(params[:id])
     send_data pic.barcode, type: 'image/png', file_name: 'barcode.png', disposition: 'inline'
   end
 end
