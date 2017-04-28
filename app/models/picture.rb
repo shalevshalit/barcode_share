@@ -6,6 +6,6 @@ class Picture < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   def barcode
-    Barby::QrCode.new(image.url).to_png
+    Barby::QrCode.new(image.url).to_png(xdim: 200)
   end
 end
